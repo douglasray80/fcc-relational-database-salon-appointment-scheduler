@@ -14,9 +14,9 @@ MAIN_MENU() {
   AVAILABLE_SERVICES=$($PSQL "SELECT service_id, name FROM services ORDER BY service_id")
   echo -e "\nWelcome to My Salon, how can I help you?"
   # print available services
-  echo "$AVAILABLE_SERVICES" | while read SERVICE
+  echo "$AVAILABLE_SERVICES" | while IFS='|' read ID NAME
   do
-    echo "$(echo $SERVICE | sed 's/|/) /')"
+    echo "$ID) $NAME"
   done
   # get customer input for service
   read SERVICE_ID_SELECTED
